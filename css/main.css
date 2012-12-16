@@ -1,0 +1,243 @@
+body {
+	/*font: 75%/ 1.5em Helvetica, Arial, sans-serif;*/
+	font: 14px/ 1.5em Helvetica, Arial, sans-serif;
+}
+
+img {
+	margin-bottom: -4px;
+}
+
+hr {
+	display: none;
+}
+
+p.info, p.warning, p.error {
+	padding: 5px;
+	padding-left: 26px;
+	text-indent: -21px;
+}
+
+p.info {
+	background: #EAFAB6;
+	border: 1px solid #b7df32;
+}
+
+p.warning {
+	background: #f9ee90;
+	border: 1px solid #ffc618;
+}
+
+p.error {
+	background: #FFB0B0;
+	border: 1px solid #C03452;
+}
+
+/* meter */
+div.meter {
+	padding: 0px;
+	height: 20px;
+	border: 1px solid #333;
+	text-align: left;
+}
+
+div.meter > div {
+	padding: 0px;
+	background-color: blue;
+	height: 100%;
+}
+
+/* links */
+a, a:visited {
+	color: #444;
+}
+
+a:hover {
+	color: black;
+}
+
+/* table */
+table {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	clear: both;
+	width: 100%;
+}
+
+th {
+	text-align: left;
+	font-weight: bold;
+}
+
+th, td {
+	padding: 5px;
+}
+
+thead tr {
+	border-bottom: 1px solid #ccc;
+	background-color: #F4F4F4;
+}
+
+tbody tr, td {
+	border-bottom: 1px dotted #ccc;
+}
+
+table.list tbody tr:nth-child(odd) {
+	background-color: #FAFAFA;
+}
+
+table.list tbody tr:hover {
+	background-color: #F4F4F4;
+}
+
+/* voc */
+table.voc td:first-child, table.voc th:first-child {
+	text-align: right;
+	border-right: 1px dotted #ccc;
+}
+
+table.voc td, table.trainer td {
+	width: 50%;
+}
+
+table.voc a {
+	text-decoration: none;
+}
+
+table.voc a:hover {
+	text-decoration: underline;
+}
+
+/* add */
+table.add td:first-child, table.add th:first-child {
+	text-align: right;
+	border-right: 1px dotted #ccc;
+}
+
+table.add input[type="text"] {
+	width: 100%;
+}
+
+table.add td:first-child input[type="text"] {
+	text-align: right;
+}
+
+/* trainer */
+table.trainer input[type="text"] {
+	width: 98%;
+}
+
+table.trainer td:first-child, table.trainer th:first-child {
+	text-align: right;
+	border-right: 1px dotted #ccc;
+}
+
+.center {
+	text-align: center !important;
+}
+
+p.correct, p.wrong {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+	padding: 10px;
+}
+
+p.correct span:first-child, p.wrong span:first-child {
+	font-size: 150%;
+}
+
+p.correct {
+	background-color: #5F5;
+}
+
+p.wrong {
+	background-color: #F55;
+}
+
+div.stats div.meter {
+	background-color: #F55;
+}
+
+div.stats div.meter > div {
+	background-color: #5F5;
+}
+
+/* forms */
+label {
+	margin-right: 5px;
+}
+
+#content label {
+	float: left;
+	width: 16em;
+}
+
+div.settingsbox {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+div.settingsbox:not(:last-child) {
+	border-bottom: 1px dotted #333;
+}
+
+/* printable list */
+table.printable {
+	width: auto;
+}
+
+table.printable td, table.printable th {
+	padding: 0px;
+	padding-left: 5px;
+	line-height: 1em;
+}
+
+table.printable tr:nth-child(odd) {
+	background-color: #F4F4F4;
+}
+
+/* layout */
+.wrapper {
+	padding: 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+#header .wrapper {
+	overflow: visible;
+}
+
+#header {
+	border-bottom: 2px solid #ccc;
+}
+
+/* menu bar */
+#nav {
+	margin: 0;
+	list-style: none;
+	position: absolute;
+	right: 10px;
+	bottom: -7px;
+}
+
+#nav li {
+	float: left;
+	padding: 5px 5px 6px 5px;
+	margin-left: 0.1em;
+}
+
+#nav li a {
+	float: left;
+	color: #333333;
+	text-decoration: none;
+	padding: 2px 5px 3px;
+}
+
+#nav li.active {
+	background: url(/images/nav/arrow.png) no-repeat bottom center;
+}
+
+#nav li:hover a, #nav li.active a {
+	background-color: #333333;
+	color: #FFFFFF;
+}

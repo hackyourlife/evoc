@@ -1,0 +1,24 @@
+php_flag display_errors on
+php_value sendmail_from "support@htlcloud.tk"
+
+RewriteEngine on
+
+#RewriteCond %{REQUEST_FILENAME} -f
+#RewriteRule ^(.*)$ %{REQUEST_FILENAME} [L]
+
+RewriteRule ^mod\/([0-9]+)$ mod.php?id=$1 [L]
+
+RewriteRule ^statistics\/(.*)$ statistics.php?o=$1 [L]
+
+RewriteRule ^(add|createcfg|logout|mod|print|register|settings|statistics|trainer)$ $1.php [QSA,L]
+
+#RewriteCond %{REQUEST_FILENAME}.php -f
+#RewriteRule ^(.*)$ %{REQUEST_FILENAME}.php [QSA,L]
+
+#RewriteCond %{REQUEST_FILENAME}.html -f
+#RewriteRule ^(.*)$ ${REQUEST_FILENAME}.html [QSA,L]
+
+<Files "settings.cfg">
+	Order allow,deny
+	deny from all
+</Files>
