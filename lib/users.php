@@ -23,6 +23,18 @@ function isUserPasswordCorrect($username, $password) {
 	return mysql_result($result, 0);
 }
 
+function getUsername($userid) {
+	global $MYSQL;
+	$userid = mysql_real_escape_string($userid);
+	$query = "SELECT `username` FROM `{$MYSQL['prefix']}users` WHERE `id` = '$userid'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	if(mysql_num_rows($result) != 1)
+		return false;
+	return mysql_result($result, 0);
+}
+
 function addUser($username, $password, $lastname) {
 	global $MYSQL;
 	$username = mysql_real_escape_string($username);
@@ -108,7 +120,7 @@ function setPassword($userid, $password) {
 function getUserInfo($userid) {
 	global $MYSQL;
 	$userid = mysql_real_escape_string($userid);
-	$query = "SELECT `interval`, `statsorder`, `correct`, `wrong`, `lastname`, `group` FROM `{$MYSQL['prefix']}users` WHERE `id` = '$userid'";
+	$query = "SELECT `username`, `interval`, `statsorder`, `correct`, `wrong`, `lastname`, `group` FROM `{$MYSQL['prefix']}users` WHERE `id` = '$userid'";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;
@@ -139,7 +151,7 @@ function getStatistics($orderby = 'total') {
 	if($orderby == 'username')
 		$ascdesc = 'ASC';
 
-	$query = "SELECT `id`, `username`, `lastname`, `correct`, `wrong`, `correct` + `wrong` AS `total`, (`correct` / (`correct` + `wrong`)) * 100.0 AS `ratio` FROM `{$MYSQL['prefix']}users` ORDER BY `$orderby` $ascdesc";
+	$query = "SELECT `id`, `username`, `lastname`, `correct`, `wrong`, `correct` + `wrong` AS `total`, (`correct` / (`correct` + `wrong`)) * 100.0 AS `ratio`, `group` FROM `{$MYSQL['prefix']}users` ORDER BY `$orderby` $ascdesc";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;
@@ -147,4 +159,25 @@ function getStatistics($orderby = 'total') {
 	while($row = mysql_fetch_object($result))
 		$stats[] = $row;
 	return $stats;
+}
+
+function getUserStats($userid) {
+	global $MYSQL;
+	$userid = mysql_real_escape_string($userid);
+	$query = "SELECT COUNT(`id`) FROM `{$MYSQL['prefix']}voc` WHERE `creator` = '$userid'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	$add = mysql_result($result, 0);
+	$query = "SELECT COUNT(`id`) FROM `{$MYSQL['prefix']}voc` WHERE `lastmodified` = '$userid'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	$mod = mysql_result($result, 0);
+	$query = "SELECT COUNT(`id`) FROM `{$MYSQL['prefix']}voc` WHERE `deletedby` = '$userid' AND `deleted` = 'yes'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	$del = mysql_result($result, 0);
+	return (object)array('add' => $add, 'mod' => $mod, 'del' => $del);
 }

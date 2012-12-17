@@ -14,6 +14,8 @@ if(!connect_mysql()) {
 include('lib/loginfilter.php');
 include('lib/navbar.php');
 
+$isAdmin = $_SESSION['userinfo']->group == 'admin';
+
 if(!isset($_SESSION['statsorder']))
 	$_SESSION['statsorder'] = $_SESSION['userinfo']->statsorder;
 $orderby = $_SESSION['statsorder'];
@@ -47,9 +49,19 @@ $tablebody = '';
 foreach($stats as $user) {
 	$username = htmlentities($user->username, 0, 'UTF-8');
 	$lastname = htmlentities($user->lastname, 0, 'UTF-8');
+	$group = ($user->group == 'admin') ? 'Administrator' : (($user->group == 'user') ? 'Benutzer' : 'Unbekannt');
+	$userid = $user->id;
 	$ratio = intval($user->ratio);
-	$tablebody .= "<tr><td>$username ($lastname)</td><td>{$user->total}</td><td>{$user->correct}</td><td>{$user->wrong}</td><td>$ratio %</td></tr>\n";
+	$name = $username;
+	$extra = '';
+	if($isAdmin) {
+		$name = "<a href=\"{$SETTINGS['path']}/user/$userid\">$name</a>";
+		$extra = "<td>$group</td>";
+	}
+	$tablebody .= "<tr><td>$name ($lastname)</td><td>{$user->total}</td><td>{$user->correct}</td><td>{$user->wrong}</td><td>$ratio %</td>$extra</tr>\n";
 }
+
+$xhdr = $isAdmin ? "<th>Gruppe</th>" : '';
 
 $table = <<< EOT
 <table class="list">
@@ -60,7 +72,7 @@ $table = <<< EOT
 			<th>Davon richtig (<a href="{$SETTINGS['path']}/statistics/correct">↑</a>)</th>
 			<th>Davon falsch (<a href="{$SETTINGS['path']}/statistics/wrong">↑</a>)</th>
 			<th>Quote (<a href="{$SETTINGS['path']}/statistics/ratio">↑</a>)</th>
-		</tr>
+$xhdr		</tr>
 	</thead>
 	<tbody>
 $tablebody

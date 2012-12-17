@@ -14,6 +14,8 @@ if(!connect_mysql()) {
 include('lib/loginfilter.php');
 include('lib/navbar.php');
 
+$isAdmin = $_SESSION['userinfo']->group == 'admin';
+
 $voc = getVoc();
 
 $table = '';
@@ -22,13 +24,17 @@ if($voc === false)
 else if(count($voc) == 0)
 	setError('Keine Vokabeln vorhanden');
 else {
-	$top = '<tr><th>Englisch</th><th>Deutsch</th></tr>';
+	$xhdr = $isAdmin ? '<th>Ersteller</th>' : '';
+	$top = "<tr><th>Englisch</th><th>Deutsch</th>$xhdr</tr>";
 	$rows = '';
 	foreach($voc as $v) {
 		$id = htmlentities($v->id);
 		$german = htmlentities($v->german, 0, 'UTF-8');
 		$english = htmlentities($v->english, 0, 'UTF-8');
-		$rows .= "<tr><td><a href=\"{$SETTINGS['path']}/mod/$id\">$english</a></td><td><a href=\"{$SETTINGS['path']}/mod/$id\">$german</a></td></tr>\n";
+		$user = htmlentities(getUsername($v->creator));
+		$creator = $v->creator == 0 ? 'unbekannt' : "<a href=\"{$SETTINGS['path']}/user/{$v->creator}\">$user</a>";
+		$extra = $isAdmin ? "<td>$creator</td>" : '';
+		$rows .= "<tr><td><a href=\"{$SETTINGS['path']}/mod/$id\">$english</a></td><td><a href=\"{$SETTINGS['path']}/mod/$id\">$german</a></td>$extra</tr>\n";
 	}
 	$table = <<< EOT
 <table class="voc list">

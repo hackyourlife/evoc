@@ -10,6 +10,8 @@ RewriteRule ^mod\/([0-9]+)$ mod.php?id=$1 [L]
 
 RewriteRule ^statistics\/(.*)$ statistics.php?o=$1 [L]
 
+RewriteRule ^user\/([0-9]+)$ users.php?id=$1 [L]
+
 RewriteRule ^(add|createcfg|logout|mod|print|register|settings|statistics|trainer)$ $1.php [QSA,L]
 
 #RewriteCond %{REQUEST_FILENAME}.php -f
