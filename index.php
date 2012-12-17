@@ -28,7 +28,7 @@ else {
 		$id = htmlentities($v->id);
 		$german = htmlentities($v->german, 0, 'UTF-8');
 		$english = htmlentities($v->english, 0, 'UTF-8');
-		$rows .= "<tr><td><a href=\"/mod/$id\">$english</a></td><td><a href=\"/mod/$id\">$german</a></td></tr>\n";
+		$rows .= "<tr><td><a href=\"{$SETTINGS['path']}/mod/$id\">$english</a></td><td><a href=\"{$SETTINGS['path']}/mod/$id\">$german</a></td></tr>\n";
 	}
 	$table = <<< EOT
 <table class="voc list">
@@ -41,7 +41,7 @@ EOT;
 $TITLE = 'eVOC | Englisch Vokabeltrainer';
 $CONTENT = <<< EOT
 <h2>Vokabelliste</h2>
-<p><a href="/print">zur Druckansicht</a></p>
+<p><a href="{$SETTINGS['path']}/print">zur Druckansicht</a></p>
 $table
 EOT;
 

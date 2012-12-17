@@ -1,8 +1,13 @@
 <?php
 
+require_once('lib/path.php');
+
 if(!file_exists('settings.cfg')) {
-	header('location: /createcfg');
+	$path = getPath();
+	header("location: $path/createcfg");
 	exit();
 }
 
 include('settings.cfg');
+
+$SETTINGS['path'] = getPath();

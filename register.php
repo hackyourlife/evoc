@@ -9,13 +9,13 @@ require_once('lib/navbar.php');
 
 if(!$SETTINGS['allow_register']) {
 	setError('Die Registrierung von neuen Accounts wurde deaktiviert!');
-	header('location: /');
+	header("location: {$SETTINGS['url']}/");
 	exit();
 }
 
 if(isLoggedIn()) {
 	setInfo('Du bist bereits eingeloggt!');
-	header('location: /');
+	header("location: {$SETTINGS['url']}/");
 	exit();
 }
 
@@ -42,7 +42,7 @@ if(isset($_POST['register']) && isset($_POST['username']) && isset($_POST['passw
 		if(!addUser($username, $password1, $lastname))
 			setError('Fehler beim erstellen des Accounts!');
 		else {
-			header('location: /');
+			header("location: {$SETTINGS['url']}/");
 			exit();
 		}
 	}
@@ -51,7 +51,7 @@ if(isset($_POST['register']) && isset($_POST['username']) && isset($_POST['passw
 $TITLE = 'Registrierung | eVOC: Englisch Vokabeltrainer';
 $CONTENT = <<< EOT
 <h2>Registrierung</h2>
-<form method="post" action="/register">
+<form method="post" action="{$SETTINGS['path']}/register">
 	<table>
 		<tr>
 			<td>Benutzername:</td>

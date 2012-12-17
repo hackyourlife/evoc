@@ -27,7 +27,7 @@ if(isset($nav)) {
 			if(($url == $uri) || ($url == $_SERVER['REQUEST_URI']))
 				$active = ' class="active"';
 		}
-		$navbar .= "<li$active><a href=\"$htmlurl\">$htmlname</a></li>\n";
+		$navbar .= "<li$active><a href=\"{$SETTINGS['path']}$htmlurl\">$htmlname</a></li>\n";
 	}
 	$navbar .= '</ul>';
 }
@@ -39,31 +39,32 @@ $info = getInfo();
 $boxes = '';
 if($error !== false) {
 	$error_html = htmlentities($error, 0, 'UTF-8');
-	$boxes .= "<p class=\"error\"><img src=\"/images/icons/error.png\" alt=\"Fehler:\" /> $error_html</p>\n";
+	$boxes .= "<p class=\"error\"><img src=\"{$SETTINGS['path']}/images/icons/error.png\" alt=\"Fehler:\" /> $error_html</p>\n";
 }
 
 if($warning !== false) {
 	$warning_html = htmlentities($warning, 0, 'UTF-8');
-	$boxes .= "<p class=\"warning\"><img src=\"/images/icons/error.png\" alt=\"Warnung:\" /> $warning_html</p>\n";
+	$boxes .= "<p class=\"warning\"><img src=\"{$SETTINGS['path']}/images/icons/error.png\" alt=\"Warnung:\" /> $warning_html</p>\n";
 }
 
 if($info !== false) {
 	$info_html = htmlentities($info, 0, 'UTF-8');
-	$boxes .= "<p class=\"info\"><img src=\"/images/icons/information.png\" alt=\"Information:\" /> $info_html</p>\n";
+	$boxes .= "<p class=\"info\"><img src=\"{$SETTINGS['path']}/images/icons/information.png\" alt=\"Information:\" /> $info_html</p>\n";
 }
 
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+echo(<<< EOT
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><?php echo($TITLE); ?></title>
-		<link type="text/css" rel="stylesheet" href="/css/main.css" />
+		<title>$TITLE</title>
+		<link type="text/css" rel="stylesheet" href="{$SETTINGS['path']}/css/main.css" />
 	</head>
 	<body>
 		<div id="header">
 			<div class="wrapper">
 				<h1>eVOC - Englisch Vokabeltrainer</h1>
-<?php echo($navbar); ?>
+$navbar
 			</div>
 		</div>
 
@@ -71,7 +72,7 @@ if($info !== false) {
 
 		<div id="content">
 			<div class="wrapper">
-				<?php echo($boxes . $CONTENT); ?>
+				{$boxes}{$CONTENT}
 			</div>
 		</div>
 
@@ -89,8 +90,10 @@ if($info !== false) {
 		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
 		piwikTracker.trackPageView();
 		piwikTracker.enableLinkTracking();
-		} catch( err ) {}
+		} catch(err) {}
 		</script><noscript><p><img src="http://stat.patrickbuchner.tk/piwik.php?idsite=1" style="border:0" alt="" /></p></noscript>
 		<!-- End Piwik Tracking Code -->
 	</body>
 </html>
+EOT
+);

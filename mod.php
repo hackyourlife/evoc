@@ -14,7 +14,7 @@ if(!connect_mysql()) {
 include('lib/loginfilter.php');
 
 if(!isset($_GET['id'])) {
-	header('location: /');
+	header("location: {$SETTINGS['url']}/");
 	exit();
 }
 
@@ -32,19 +32,19 @@ if(isset($_POST['mod']) && isset($_POST['german']) && isset($_POST['english'])) 
 		if(!modVoc($id, $german, $english))
 			setError('Fehler beim hinzufügen!');
 		else {
-			header('location: /');
+			header("location: {$SETTINGS['url']}/");
 			exit();
 		}
 	}
 } else if(isset($_POST['back'])) {
-	header('location: /');
+	header("location: {$SETTINGS['url']}/");
 	exit();
 }
 
 $voc = getVocByID($id);
 if($voc === false) {
 	setError('Word not found in database');
-	header('location: /');
+	header("location: {$SETTINGS['url']}/");
 	exit();
 }
 
@@ -54,7 +54,7 @@ $english = htmlentities($voc->english, 0, 'UTF-8');
 $TITLE = 'Vokabel modifizieren | eVOC: Englisch Vokabeltrainer';
 $CONTENT = <<< EOT
 <h2>Vokabel hinzuf&uuml;gen</h2>
-<form method="post" action="/mod/$id">
+<form method="post" action="{$SETTINGS['path']}/mod/$id">
 	<table class="add">
 		<thead>
 			<tr>

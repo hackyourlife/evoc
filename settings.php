@@ -27,7 +27,7 @@ if(isset($_POST['lastname'])) {
 		} else
 			setError('Fehler beim speichern des Nachnamen!');
 	}
-	header('location: /settings');
+	header("location: {$SETTINGS['url']}/settings");
 	exit();
 }
 
@@ -44,7 +44,7 @@ if(isset($_POST['password']) && isset($_POST['password2'])) {
 		else
 			setError('Fehler beim speichern des Passwortes!');
 	}
-	header('location: /settings');
+	header("location: {$SETTINGS['url']}/settings");
 	exit();
 }
 
@@ -54,7 +54,7 @@ $CONTENT = <<< EOT
 <h2>Einstellungen</h2>
 
 <div class="settingsbox">
-	<form method="post" action="/settings">
+	<form method="post" action="{$SETTINGS['path']}/settings">
 		<label for="lastname">Nachname:</label>
 		<input type="text" name="lastname" value="$lastname" />
 		<input type="submit" name="setlastname" value="Speichern" />
@@ -62,7 +62,7 @@ $CONTENT = <<< EOT
 </div>
 
 <div class="settingsbox">
-	<form method="post" action="/settings">
+	<form method="post" action="{$SETTINGS['path']}/settings">
 		<label for="password">Passwort:</label>
 		<input type="password" name="password" value="" /><br />
 		<label for="password2">Passwort (Bestätigung):</label>

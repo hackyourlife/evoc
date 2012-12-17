@@ -105,8 +105,8 @@ EOT;
 		$id = $_SESSION['voc']->id;
 		$answertext .= <<< EOT
 		<tr>
-			<td><a href="/mod/$id">$english</a></td>
-			<td><a href="/mod/$id">$german</a></td>
+			<td><a href="{$SETTINGS['path']}/mod/$id">$english</a></td>
+			<td><a href="{$SETTINGS['path']}/mod/$id">$german</a></td>
 		</tr>
 EOT;
 	}
@@ -164,7 +164,7 @@ if(isset($_SESSION['voc'])) {
 	$english = htmlentities($_SESSION['voc']->english, 0, 'UTF-8');
 	$german = htmlentities($_SESSION['voc']->german, 0, 'UTF-8');
 	$table = <<< EOT
-<form method="post" action="/trainer">
+<form method="post" action="{$SETTINGS['path']}/trainer">
 	<table class="trainer">
 		<thead>
 			<tr>
@@ -204,7 +204,7 @@ $answertext
 	<h3>Statistik</h3>
 	<div class="meter"><div style="width: $percents%;" /></div></div>
 </div>
-<form method="post" action="/trainer">
+<form method="post" action="{$SETTINGS['path']}/trainer">
 	<p>Pr&uuml;fe die letzten
 		<select name="i">
 $options

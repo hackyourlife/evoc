@@ -24,7 +24,7 @@ if(isset($_POST['add']) && isset($_POST['german']) && isset($_POST['english'])) 
 			setError('Fehler beim hinzufügen!');
 		else {
 			setInfo('Vokabel wurde hinzugefügt!');
-			header('location: /add');
+			header("location: {$SETTINGS['url']}/add");
 			exit();
 		}
 	}
@@ -33,7 +33,7 @@ if(isset($_POST['add']) && isset($_POST['german']) && isset($_POST['english'])) 
 $TITLE = 'Vokabel eintragen | eVOC: Englisch Vokabeltrainer';
 $CONTENT = <<< EOT
 <h2>Vokabel hinzuf&uuml;gen</h2>
-<form method="post" action="/add">
+<form method="post" action="{$SETTINGS['path']}/add">
 	<table class="add">
 		<thead>
 			<tr>

@@ -2,10 +2,15 @@
 
 require_once('lib/db.php');
 require_once('lib/session.php');
+require_once('lib/path.php');
+
+$SETTINGS = array(
+	'path' => getPath()
+);
 
 if(file_exists('settings.cfg')) {
 	setError('Konfiguration bereits vorhanden!');
-	header('location: /');
+	header("location: {$SETTINGS['path']}");
 	exit();
 }
 
@@ -17,7 +22,10 @@ if(isset($_POST['save']) && isset($_POST['hostname']) && isset($_POST['database'
 	$prefix = trim($_POST['prefix']);
 	$error = false;
 	$connection = @mysql_connect($hostname, $username, $password);
-	if(!$connection) {
+	if((strlen($hostname) == 0) || (strlen($database) == 0) || (strlen($username) == 0) || (strlen($password) == 0)) {
+		setError('Leere Felder sind nicht erlaubt!');
+		$error = true;
+	} else if(!$connection) {
 		setError('Fehler beim Herstellen der Datenbankverbindung! (' . mysql_error() . ')');
 		$error = true;
 	} else {
@@ -55,12 +63,12 @@ if(isset($_POST['save']) && isset($_POST['hostname']) && isset($_POST['database'
 	'prefix'   => '$prefix'
 );
 \$SETTINGS = array(
-	'allow_register' => 'true'
+	'allow_register' => true
 );
 EOT
 			);
 			setInfo('Konfiguration erstellt!');
-			header('location: /');
+			header("location: {$SETTINGS['path']}");
 			exit();
 		}
 	}
@@ -75,7 +83,7 @@ $TITLE = 'Erstkonfiguration | eVOC: Englisch Vokabeltrainer';
 
 $CONTENT = <<< EOT
 <h2>Erstkonfiguration</h2>
-<form method="post" action="/createcfg">
+<form method="post" action="{$SETTINGS['path']}/createcfg">
 	<table>
 		<tr>
 			<td>MySQL-Hostname</td>

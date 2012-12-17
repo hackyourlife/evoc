@@ -32,7 +32,7 @@ if(isset($_REQUEST['o'])) {
 			setInfo('Sortierreihenfolge wurde gespeichert!');
 		else
 			setError('Fehler beim speichern der Sortierreihenfolge!');
-		header('location: /statistics');
+		header("location: {$SETTINGS['url']}/statistics");
 		exit();
 	}
 }
@@ -55,11 +55,11 @@ $table = <<< EOT
 <table class="list">
 	<thead>
 		<tr>
-			<th>Benuztername (<a href="/statistics/username">↑</a>)</th>
-			<th>Gesamt (<a href="/statistics/total">↑</a>)</th>
-			<th>Davon richtig (<a href="/statistics/correct">↑</a>)</th>
-			<th>Davon falsch (<a href="/statistics/wrong">↑</a>)</th>
-			<th>Quote (<a href="/statistics/ratio">↑</a>)</th>
+			<th>Benuztername (<a href="{$SETTINGS['path']}/statistics/username">↑</a>)</th>
+			<th>Gesamt (<a href="{$SETTINGS['path']}/statistics/total">↑</a>)</th>
+			<th>Davon richtig (<a href="{$SETTINGS['path']}/statistics/correct">↑</a>)</th>
+			<th>Davon falsch (<a href="{$SETTINGS['path']}/statistics/wrong">↑</a>)</th>
+			<th>Quote (<a href="{$SETTINGS['path']}/statistics/ratio">↑</a>)</th>
 		</tr>
 	</thead>
 	<tbody>

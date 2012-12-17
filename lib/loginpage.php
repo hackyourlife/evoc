@@ -4,6 +4,7 @@ $TITLE = 'eVOC | Engisch Vokabeltrainer';
 
 $URI = $_SERVER['REQUEST_URI'];
 
+$registerlink = $SETTINGS['allow_register'] ? '<a href="/register" rel="nofollow">Noch kein Account?</a><br />' : '';
 // main content
 $CONTENT = <<< EOT
 <h2>Zugriff verweigert</h2>
@@ -15,7 +16,7 @@ $CONTENT = <<< EOT
 		<input type="submit" name="login" value="Login &raquo;" />
 	</p>
 	<p>
-		<a href="/register" rel="nofollow">Noch kein Account?</a><br />
+		$registerlink
 		<a href="/lostpassword" rel="nofollow">Passwort vergessen?</a>
 	</p>
 </form>

@@ -49,14 +49,17 @@ header('cache-control: no-store, no-cache, must-revalidate, post-check=0, pre-ch
 header('pragma: no-cache');
 header('expires: Thu, 19 Nov 1981 08:52:00 GMT');
 
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+echo(<<< EOT
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<title><?php echo($TITLE); ?></title>
-		<link type="text/css" rel="stylesheet" href="/css/main.css" />
+		<title>$TITLE</title>
+		<link type="text/css" rel="stylesheet" href="{$SETTINGS['path']}/css/main.css" />
 	</head>
 	<body>
-<?php echo($CONTENT); ?>
+$CONTENT
 	</body>
 </html>
+EOT
+);
