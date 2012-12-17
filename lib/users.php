@@ -35,6 +35,20 @@ function addUser($username, $password, $lastname) {
 	return true;
 }
 
+function deleteUser($username) {
+	global $MYSQL;
+	$username = mysql_real_escape_string($username);
+	$query = "SELECT `id` FROM `{$MYSQL['prefix']}users` WHERE `username` = '$username'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	$id = mysql_result($result, 0);
+
+	$query = "DELETE FROM `{$MYSQL['prefix']}users` WHERE `id` = '$id'";
+	$result = mysql_query($query);
+	return $result ? true : false;
+}
+
 function setUserGroup($userid, $group) {
 	global $MYSQL;
 	$userid = mysql_real_escape_string($userid);
@@ -94,7 +108,7 @@ function setPassword($userid, $password) {
 function getUserInfo($userid) {
 	global $MYSQL;
 	$userid = mysql_real_escape_string($userid);
-	$query = "SELECT `interval`, `statsorder`, `correct`, `wrong`, `lastname` FROM `{$MYSQL['prefix']}users` WHERE `id` = '$userid'";
+	$query = "SELECT `interval`, `statsorder`, `correct`, `wrong`, `lastname`, `group` FROM `{$MYSQL['prefix']}users` WHERE `id` = '$userid'";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;

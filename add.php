@@ -20,7 +20,7 @@ if(isset($_POST['add']) && isset($_POST['german']) && isset($_POST['english'])) 
 	if((strlen($german) == 0) && (strlen($english) == 0))
 		setError('Du musst das Formular schon ausfüllen!');
 	else {
-		if(!addVoc($german, $english))
+		if(!addVoc($german, $english, $_SESSION['userid']))
 			setError('Fehler beim hinzufügen!');
 		else {
 			setInfo('Vokabel wurde hinzugefügt!');

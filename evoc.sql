@@ -10,12 +10,22 @@ CREATE TABLE IF NOT EXISTS `%{PREFIX}users` (
   `group` enum('user','admin') NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS `%{PREFIX}voc` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `english` varchar(1024) NOT NULL,
   `german` varchar(1024) NOT NULL,
+  `creator` int(11) NOT NULL DEFAULT '1',
+  `lastmodified` int(11) NOT NULL DEFAULT '0',
+  `deleted` enum('no','yes') NOT NULL DEFAULT 'no',
+  `deletedby` int(11) NOT NULL DEFAULT '0',
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS `%{PREFIX}weights` (
+  `user` int(11) NOT NULL,
+  `voc` int(11) NOT NULL,
+  `type` enum('correct','wrong') NOT NULL DEFAULT 'wrong'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
