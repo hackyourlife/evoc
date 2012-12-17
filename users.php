@@ -105,6 +105,19 @@ if(isset($_POST['deleteconfirmed']) && isset($_POST['type'])) {
 	}
 }
 
+if(isset($_POST['group']) && isset($_POST['code'])) {
+	$group = $_POST['group'];
+	$code = $_POST['code'];
+	if($code == $_SESSION['groupcode']) {
+		if(setUserGroup($userid, $group))
+			setInfo("Gruppe erfolgreich zugewiesen!");
+		else
+			setError("Die Gruppe konnte nicht zugewiesen werden!");
+		header("location: {$SETTINGS['url']}/user/$userid");
+		exit();
+	}
+}
+
 $userinfo = getUserInfo($userid);
 $userstats = getUserStats($userid);
 
@@ -121,6 +134,9 @@ $deleted = $userstats->del;
 
 $deletecode = sha1(rand());
 $_SESSION['deletecode'] = $deletecode;
+
+$groupcode = sha1(rand());
+$_SESSION['groupcode'] = $groupcode;
 
 $TITLE = 'Benutzer | eVOC: Englisch Vokabeltrainer';
 
@@ -179,6 +195,18 @@ $CONTENT = <<< EOT
 <form method="post" action="{$SETTINGS['path']}/user/$userid">
 	<p>Passwort: <input type="password" name="password" size="64" value="" />
 	<input type="submit" name="save" value="Speichern" /></p>
+</form>
+
+<h3>Gruppenzugeh&ouml;rigkeit festlegen</h3>
+<form method="post" action="{$SETTINGS['path']}/user/$userid">
+	<input type="hidden" name="code" value="$groupcode" />
+	<p>Gruppe:
+		<select name="group">
+			<option value="user" selected="selected">Benutzer</option>
+			<option value="admin">Administrator</option>
+		</select>
+		<input type="submit" name="save" value="Speichern" />
+	</p>
 </form>
 
 <h3>L&ouml;schen</h3>
