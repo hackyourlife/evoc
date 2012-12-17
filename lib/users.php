@@ -47,16 +47,10 @@ function addUser($username, $password, $lastname) {
 	return true;
 }
 
-function deleteUser($username) {
+function deleteUser($userid) {
 	global $MYSQL;
-	$username = mysql_real_escape_string($username);
-	$query = "SELECT `id` FROM `{$MYSQL['prefix']}users` WHERE `username` = '$username'";
-	$result = mysql_query($query);
-	if(!$result)
-		return false;
-	$id = mysql_result($result, 0);
-
-	$query = "DELETE FROM `{$MYSQL['prefix']}users` WHERE `id` = '$id'";
+	$userid = mysql_real_escape_string($userid);
+	$query = "DELETE FROM `{$MYSQL['prefix']}users` WHERE `id` = '$userid'";
 	$result = mysql_query($query);
 	return $result ? true : false;
 }
