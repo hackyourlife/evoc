@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `%{PREFIX}voc` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `english` varchar(1024) NOT NULL,
   `german` varchar(1024) NOT NULL,
-  `creator` int(11) NOT NULL DEFAULT '1',
+  `creator` int(11) NOT NULL DEFAULT '0',
   `lastmodified` int(11) NOT NULL DEFAULT '0',
   `deleted` enum('no','yes') NOT NULL DEFAULT 'no',
   `deletedby` int(11) NOT NULL DEFAULT '0',
