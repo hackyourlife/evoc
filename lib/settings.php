@@ -11,3 +11,4 @@ if(!file_exists('settings.cfg')) {
 include('settings.cfg');
 
 $SETTINGS['path'] = getPath();
+$SETTINGS['url'] = getURL();

@@ -35,6 +35,17 @@ function addUser($username, $password, $lastname) {
 	return true;
 }
 
+function setUserGroup($userid, $group) {
+	global $MYSQL;
+	$userid = mysql_real_escape_string($userid);
+	$group = mysql_real_escape_string($group);
+	$query = "UPDATE `{$MYSQL['prefix']}users` SET `group` = '$group' WHERE `id` = '$userid'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	return true;
+}
+
 function setUserInterval($userid, $interval) {
 	global $MYSQL;
 	$userid = mysql_real_escape_string($userid);
