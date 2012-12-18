@@ -13,6 +13,8 @@ if(!connect_mysql()) {
 
 include('lib/loginfilter.php');
 
+secureArea('user');
+
 if(!isset($_GET['id'])) {
 	header("location: {$SETTINGS['url']}/");
 	exit();
@@ -51,7 +53,7 @@ if($voc === false) {
 $german = htmlentities($voc->german, 0, 'UTF-8');
 $english = htmlentities($voc->english, 0, 'UTF-8');
 
-$TITLE = 'Vokabel modifizieren | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Vokabel modifizieren';
 $CONTENT = <<< EOT
 <h2>Vokabel hinzuf&uuml;gen</h2>
 <form method="post" action="{$SETTINGS['path']}/mod/$id">

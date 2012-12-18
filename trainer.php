@@ -36,7 +36,7 @@ if(isset($_POST['setinterval'])) {
 		} else
 			setError('Zeitraum wurde nicht gespeichert!');
 	}
-	header("location: {$_SERVER['REQUEST_URI']}");
+	header("location: {$SETTINGS['url']}/trainer");
 	exit();
 }
 
@@ -195,7 +195,7 @@ $total = $_SESSION['userinfo']->correct + $_SESSION['userinfo']->wrong;
 $percents = ($total != 0) ? ($_SESSION['userinfo']->correct / $total) * 100.0 : 0;
 
 // OUTPUT
-$TITLE = 'Trainer | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Trainer';
 $CONTENT = <<< EOT
 <h2>Who can we ask? ... $lastname!</h2>
 $table

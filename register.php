@@ -48,7 +48,7 @@ if(isset($_POST['register']) && isset($_POST['username']) && isset($_POST['passw
 	}
 }
 
-$TITLE = 'Registrierung | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Registrierung';
 $CONTENT = <<< EOT
 <h2>Registrierung</h2>
 <form method="post" action="{$SETTINGS['path']}/register">

@@ -11,9 +11,6 @@ if(!connect_mysql()) {
 	exit();
 }
 
-include('lib/loginfilter.php');
-include('lib/navbar.php');
-
 $voc = getVoc();
 
 $table = '';
@@ -38,7 +35,7 @@ else {
 EOT;
 }
 
-$TITLE = 'Druckansicht | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Druckansicht | eVOC - Englisch Vokabeltrainer';
 $CONTENT = <<< EOT
 <h2>Vokabelliste - Druckansicht</h2>
 $table

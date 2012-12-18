@@ -12,9 +12,11 @@ if(!connect_mysql()) {
 }
 
 include('lib/loginfilter.php');
+
+$nav = array('Benutzer' => $_SERVER['REQUEST_URI']);
 include('lib/navbar.php');
 
-$isAdmin = $_SESSION['userinfo']->group == 'admin';
+$isAdmin = isUserInRole('admin');
 
 if(!$isAdmin) {
 	setError('Du bist kein Administrator!');
@@ -123,7 +125,7 @@ $userstats = getUserStats($userid);
 
 $username = htmlentities($userinfo->username, 0, 'UTF-8');
 $lastname = htmlentities($userinfo->lastname, 0, 'UTF-8');
-$group = ($userinfo->group == 'admin') ? 'Administrator' : (($userinfo->group == 'user') ? 'Benutzer' : 'unbekannt');
+$group = getRoleName($userinfo->group);
 $correct = $userinfo->correct;
 $wrong = $userinfo->wrong;
 $total = $correct + $wrong;
@@ -132,13 +134,17 @@ $created = $userstats->add;
 $modified = $userstats->mod;
 $deleted = $userstats->del;
 
+$selectedguest = $userinfo->group == 'guest' ? ' selected="selected"' : '';
+$selecteduser = $userinfo->group == 'user' ? ' selected="selected"' : '';
+$selectedadmin = $userinfo->group == 'admin' ? ' selected="selected"' : '';
+
 $deletecode = sha1(rand());
 $_SESSION['deletecode'] = $deletecode;
 
 $groupcode = sha1(rand());
 $_SESSION['groupcode'] = $groupcode;
 
-$TITLE = 'Benutzer | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Benutzer';
 
 $CONTENT = <<< EOT
 <h2>Benutzer &raquo;$username&laquo;</h2>
@@ -202,8 +208,9 @@ $CONTENT = <<< EOT
 	<input type="hidden" name="code" value="$groupcode" />
 	<p>Gruppe:
 		<select name="group">
-			<option value="user" selected="selected">Benutzer</option>
-			<option value="admin">Administrator</option>
+			<option value="guest"$selectedguest>Gast</option>
+			<option value="user"$selecteduser>Benutzer</option>
+			<option value="admin"$selectedadmin>Administrator</option>
 		</select>
 		<input type="submit" name="save" value="Speichern" />
 	</p>

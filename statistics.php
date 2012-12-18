@@ -14,7 +14,7 @@ if(!connect_mysql()) {
 include('lib/loginfilter.php');
 include('lib/navbar.php');
 
-$isAdmin = $_SESSION['userinfo']->group == 'admin';
+$isAdmin = isUserInRole('admin');
 
 if(!isset($_SESSION['statsorder']))
 	$_SESSION['statsorder'] = $_SESSION['userinfo']->statsorder;
@@ -49,7 +49,7 @@ $tablebody = '';
 foreach($stats as $user) {
 	$username = htmlentities($user->username, 0, 'UTF-8');
 	$lastname = htmlentities($user->lastname, 0, 'UTF-8');
-	$group = ($user->group == 'admin') ? 'Administrator' : (($user->group == 'user') ? 'Benutzer' : 'Unbekannt');
+	$group = getRoleName($user->group);
 	$userid = $user->id;
 	$ratio = intval($user->ratio);
 	$name = $username;
@@ -80,7 +80,7 @@ $tablebody
 </table>
 EOT;
 
-$TITLE = 'Statistik | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Statistik';
 
 $CONTENT = <<< EOT
 <h2>Statistik</h2>

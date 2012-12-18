@@ -14,6 +14,8 @@ if(!connect_mysql()) {
 include('lib/loginfilter.php');
 include('lib/navbar.php');
 
+secureArea('user');
+
 if(isset($_POST['add']) && isset($_POST['german']) && isset($_POST['english'])) {
 	$german = trim($_POST['german']);
 	$english = trim($_POST['english']);
@@ -30,7 +32,7 @@ if(isset($_POST['add']) && isset($_POST['german']) && isset($_POST['english'])) 
 	}
 }
 
-$TITLE = 'Vokabel eintragen | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Vokabel eintragen';
 $CONTENT = <<< EOT
 <h2>Vokabel hinzuf&uuml;gen</h2>
 <form method="post" action="{$SETTINGS['path']}/add">

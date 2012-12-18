@@ -1,7 +1,7 @@
 ﻿<?php
 
 $elements = array();
-if(isLoggedIn())
+if(isLoggedIn()) {
 	$elements = array(
 		'Vokabelliste'	=> '/',
 		'Hinzufügen'	=> '/add',
@@ -10,7 +10,9 @@ if(isLoggedIn())
 		'Einstellungen'	=> '/settings',
 		'Logout'	=> '/logout'
 	);
-else
+	if(!isUserInRole('user'))
+		unset($elements['Hinzufügen']);
+} else
 	$elements = array(
 		'Login'		=> '/',
 		'Anmeldung'	=> '/register'

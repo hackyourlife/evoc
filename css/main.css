@@ -107,6 +107,10 @@ table.voc a:hover {
 	text-decoration: underline;
 }
 
+tr.deleted {
+	background-color: #aaa !important;
+}
+
 /* add */
 table.add td:first-child, table.add th:first-child {
 	text-align: right;

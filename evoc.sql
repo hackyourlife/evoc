@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS `%{PREFIX}users` (
   `correct` int(11) NOT NULL DEFAULT '0',
   `wrong` int(11) NOT NULL DEFAULT '0',
   `lastname` varchar(64) NOT NULL,
-  `group` enum('user','admin') NOT NULL DEFAULT 'user',
+  `group` enum('guest', 'user','admin') NOT NULL DEFAULT 'guest',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

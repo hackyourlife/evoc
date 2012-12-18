@@ -48,7 +48,7 @@ if(isset($_POST['password']) && isset($_POST['password2'])) {
 	exit();
 }
 
-$TITLE = 'Einstellungen | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Einstellungen';
 
 $CONTENT = <<< EOT
 <h2>Einstellungen</h2>

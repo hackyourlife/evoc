@@ -19,3 +19,12 @@ function doLogin() {
 		return true;
 	}
 }
+
+function secureArea($group) {
+	global $SETTINGS;
+	if(!isUserInRole($group)) {
+		setError('Du besitzt nicht die nötigen Rechte!');
+		header("location: {$SETTINGS['url']}/");
+		exit();
+	}
+}

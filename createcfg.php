@@ -137,7 +137,7 @@ $prefix = isset($_POST['prefix']) ? htmlentities($_POST['prefix']) : '';
 $adminusername = isset($_POST['adminusername']) ? htmlentities($_POST['adminusername']) : '';
 $lastname = isset($_POST['lastname']) ? htmlentities($_POST['lastname']) : '';
 
-$TITLE = 'Erstkonfiguration | eVOC: Englisch Vokabeltrainer';
+$TITLE = 'Erstkonfiguration';
 
 $CONTENT = <<< EOT
 <h2>Erstkonfiguration</h2>
