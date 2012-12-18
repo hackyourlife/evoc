@@ -105,8 +105,8 @@ EOT;
 		$id = $_SESSION['voc']->id;
 		$answertext .= <<< EOT
 		<tr>
-			<td><a href="{$SETTINGS['path']}/mod/$id">$english</a></td>
 			<td><a href="{$SETTINGS['path']}/mod/$id">$german</a></td>
+			<td><a href="{$SETTINGS['path']}/mod/$id">$english</a></td>
 		</tr>
 EOT;
 	}
