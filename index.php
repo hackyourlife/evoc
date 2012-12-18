@@ -26,6 +26,7 @@ else if(count($voc) == 0)
 	setError('Keine Vokabeln vorhanden');
 else {
 	$xhdr = $isAdmin ? '<th>Ersteller</th>' : '';
+	$xhdr = $isUser ? "<th></th>$xhdr" : '';
 	$top = "<tr><th>Englisch</th><th>Deutsch</th>$xhdr</tr>";
 	$rows = '';
 	foreach($voc as $v) {
@@ -34,7 +35,13 @@ else {
 		$english = htmlentities($v->english, 0, 'UTF-8');
 		$user = htmlentities(getUsername($v->creator));
 		$creator = $v->creator == 0 ? 'unbekannt' : "<a href=\"{$SETTINGS['path']}/user/{$v->creator}\">$user</a>";
-		$extra = $isAdmin ? "<td>$creator</td>" : '';
+		$actions = '';
+		// restore deleted voc
+		$actions .= ($isAdmin && $v->deleted == 'yes') ? "<a href=\"{$SETTINGS['path']}/restore/$id\"><img src=\"{$SETTINGS['path']}/images/icons/accept.png\" alt=\"Wiederherstellen\" title=\"Wiederherstellen\" /></a>" : '';
+		// delete
+		$actions .= "<a href=\"{$SETTINGS['path']}/del/$id\"><img src=\"{$SETTINGS['path']}/images/icons/cross.png\" alt=\"L&ouml;schen\" title=\"L&ouml;schen\" /></a>";
+		$extra = $isUser ? "<td class=\"actions\">$actions</td>" : '';
+		$extra .= $isAdmin ? "<td>$creator</td>" : '';
 		$links = $isUser ? "<td><a href=\"{$SETTINGS['path']}/mod/$id\">$english</a></td><td><a href=\"{$SETTINGS['path']}/mod/$id\">$german</a></td>" : "<td>$english</td><td>$german</td>";
 		$class = ($isAdmin && $v->deleted == 'yes') ? ' class="deleted"' : '';
 		$rows .= "<tr$class>$links$extra</tr>\n";

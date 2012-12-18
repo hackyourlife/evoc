@@ -111,6 +111,11 @@ tr.deleted {
 	background-color: #aaa !important;
 }
 
+td.actions {
+	text-align: right;
+	white-space: nowrap;
+}
+
 /* add */
 table.add td:first-child, table.add th:first-child {
 	text-align: right;

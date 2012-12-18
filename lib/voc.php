@@ -97,6 +97,17 @@ function delVoc($id, $userid) {
 	return true;
 }
 
+function restoreVoc($id, $userid) {
+	global $MYSQL;
+	$id = mysql_real_escape_string($id);
+	$userid = mysql_real_escape_string($userid);
+	$query = "UPDATE `{$MYSQL['prefix']}voc` SET `deleted` = 'no' WHERE `id` = '$id'";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	return true;
+}
+
 function getVocByID($id) {
 	global $MYSQL;
 	$id = mysql_real_escape_string($id);
