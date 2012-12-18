@@ -16,7 +16,7 @@ RewriteRule ^user\/([0-9]+)/([0-9a-z]+)$ users.php?id=$1&code=$2&del=true [L]
 # delete / restore
 RewriteRule ^(del|restore)\/([0-9]+)$ $1.php?id=$2 [L]
 
-RewriteRule ^(add|createcfg|logout|mod|print|register|settings|statistics|trainer)$ $1.php [QSA,L]
+RewriteRule ^(add|createcfg|logout|mod|print|register|settings|statistics|trainer|lostpassword)$ $1.php [QSA,L]
 
 #RewriteCond %{REQUEST_FILENAME}.php -f
 #RewriteRule ^(.*)$ %{REQUEST_FILENAME}.php [QSA,L]

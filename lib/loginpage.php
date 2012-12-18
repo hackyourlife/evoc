@@ -1,7 +1,5 @@
 <?php
 
-$TITLE = 'eVOC | Engisch Vokabeltrainer';
-
 $URI = $_SERVER['REQUEST_URI'];
 
 $registerlink = $SETTINGS['allow_register'] ? "<a href=\"{$SETTINGS['path']}/register\" rel=\"nofollow\">Noch kein Account?</a><br />" : '';
