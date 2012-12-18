@@ -27,5 +27,5 @@ CREATE TABLE IF NOT EXISTS `%{PREFIX}voc` (
 CREATE TABLE IF NOT EXISTS `%{PREFIX}weights` (
   `user` int(11) NOT NULL,
   `voc` int(11) NOT NULL,
-  `type` enum('correct','wrong') NOT NULL DEFAULT 'wrong'
+  `weight` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
