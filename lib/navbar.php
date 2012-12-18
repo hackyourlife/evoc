@@ -15,7 +15,8 @@ if(isLoggedIn()) {
 } else
 	$elements = array(
 		'Login'		=> '/',
-		'Anmeldung'	=> '/register'
+		'Anmeldung'	=> '/register',
+		'Vokabelliste'	=> '/print'
 	);
 
 if(!isset($nav))
