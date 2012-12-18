@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `%{PREFIX}users` (
   `password` varchar(128) NOT NULL,
   `statsorder` enum('total','ratio','username','correct','wrong') NOT NULL DEFAULT 'ratio',
   `interval` int(11) NOT NULL DEFAULT '2',
+  `useboxes` enum('no','yes') NOT NULL DEFAULT 'no',
   `correct` int(11) NOT NULL DEFAULT '0',
   `wrong` int(11) NOT NULL DEFAULT '0',
   `lastname` varchar(64) NOT NULL,
