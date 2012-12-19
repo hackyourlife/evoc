@@ -39,7 +39,7 @@ else {
 		// restore deleted voc
 		$actions .= ($isAdmin && $v->deleted == 'yes') ? "<a href=\"{$SETTINGS['path']}/restore/$id\"><img src=\"{$SETTINGS['path']}/images/icons/accept.png\" alt=\"Wiederherstellen\" title=\"Wiederherstellen\" /></a>" : '';
 		// delete
-		$actions .= "<a href=\"{$SETTINGS['path']}/del/$id\"><img src=\"{$SETTINGS['path']}/images/icons/cross.png\" alt=\"L&ouml;schen\" title=\"L&ouml;schen\" /></a>";
+		$actions .= "<a href=\"{$SETTINGS['path']}/del/$id\"><img src=\"{$SETTINGS['path']}/images/icons/cross.png\" onclick=\"return confirm('Wirklich löschen?');\" alt=\"L&ouml;schen\" title=\"L&ouml;schen\" /></a>";
 		$extra = $isUser ? "<td class=\"actions\">$actions</td>" : '';
 		$extra .= $isAdmin ? "<td>$creator</td>" : '';
 		$links = $isUser ? "<td><a href=\"{$SETTINGS['path']}/mod/$id\">$english</a></td><td><a href=\"{$SETTINGS['path']}/mod/$id\">$german</a></td>" : "<td>$english</td><td>$german</td>";
