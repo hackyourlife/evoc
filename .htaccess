@@ -1,7 +1,5 @@
 Options -Indexes
 
-php_flag display_errors on
-
 RewriteEngine on
 
 #RewriteCond %{REQUEST_FILENAME} -f
