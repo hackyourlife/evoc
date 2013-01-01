@@ -5,7 +5,7 @@ header('cache-control: no-store, no-cache, must-revalidate, post-check=0, pre-ch
 header('pragma: no-cache');
 header('expires: Thu, 19 Nov 1981 08:52:00 GMT');
 
-$uri = $_SERVER['REQUEST_URI'];
+$uri = substr($_SERVER['REQUEST_URI'], strlen($SETTINGS['path']));
 $end = strpos($uri, '/', 1);
 if($end === false)
 	$end = strlen($uri);
