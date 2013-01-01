@@ -243,7 +243,7 @@ table.printable tr:nth-child(odd) {
 }
 
 #nav li.active {
-	background: url(/images/nav/arrow.png) no-repeat bottom center;
+	background: url(../images/nav/arrow.png) no-repeat bottom center;
 }
 
 #nav li:hover a, #nav li.active a {
