@@ -121,39 +121,35 @@ if(!isset($_SESSION['voc']) || isset($_POST['voc']) || $_SESSION['intervalchange
 		$_SESSION['intervalchanged'] = false;
 	$interval_start = $interval;
 	$voc = getVocByTime($interval * 7);
-	if($voc === false) {
-		setError('Keine Vokabeln vorhanden!');
-	} else {
-		$count = 0;
-		while($interval <= 64) {
-			$count = getVocByTimeCount($interval * 7);
-			if($count === false) {
-				setError('Fehler beim suchen!');
-				$count = 0;
-				break;
-			}
-			if($count >= 10)
-				break;
-			$interval++;
+	$count = 0;
+	while($interval <= 64) {
+		$count = getVocByTimeCount($interval * 7);
+		if($count === false) {
+			setError('Fehler beim suchen!');
+			$count = 0;
+			break;
 		}
-		if($count < 10) {
-			setError('Nicht genügend Vokabeln zum trainieren!');
-			unset($_SESSION['voc']);
-		} else {
-			$voc = getVocByTime($interval * 7);
-			if($voc === false)
-				setError('Fehler beim laden der Vokabeln!');
-			else {
-				$_SESSION['voc'] = $voc;
-				$vocs = getVocsByGerman($voc->german);
-				if($vocs === false) {
-					setError('Fehler beim suchen!');
-					unset($_SESSION['voc']);
-				} else {
-					if($interval != $interval_start)
-						setInfo("Aufgrund mangelnder Vokabeln wurde der Zeitraum auf $interval Wochen erhöht");
-					$_SESSION['vocs'] = $vocs;
-				}
+		if($count >= 10)
+			break;
+		$interval++;
+	}
+	if($count < 10) {
+		setError('Nicht genügend Vokabeln zum trainieren!');
+		unset($_SESSION['voc']);
+	} else {
+		$voc = getVocByTime($interval * 7);
+		if($voc === false)
+			setError('Fehler beim laden der Vokabeln!');
+		else {
+			$_SESSION['voc'] = $voc;
+			$vocs = getVocsByGerman($voc->german);
+			if($vocs === false) {
+				setError('Fehler beim suchen!');
+				unset($_SESSION['voc']);
+			} else {
+				if($interval != $interval_start)
+					setInfo("Aufgrund mangelnder Vokabeln wurde der Zeitraum auf $interval Wochen erhöht");
+				$_SESSION['vocs'] = $vocs;
 			}
 		}
 	}
