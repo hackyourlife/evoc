@@ -111,7 +111,7 @@ function restoreVoc($id, $userid) {
 function getVocByID($id) {
 	global $MYSQL;
 	$id = mysql_real_escape_string($id);
-	$query = "SELECT `id`, `time`, `english`, `german` FROM `{$MYSQL['prefix']}voc` WHERE `id` = '$id'";
+	$query = "SELECT `id`, `time`, `english`, `german`, `deleted`, `creator`, `lastmodified`, `deletedby` FROM `{$MYSQL['prefix']}voc` WHERE `id` = '$id'";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;

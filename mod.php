@@ -44,8 +44,8 @@ if(isset($_POST['mod']) && isset($_POST['german']) && isset($_POST['english'])) 
 }
 
 $voc = getVocByID($id);
-if($voc === false) {
-	setError('Word not found in database');
+if(($voc === false) || (!isUserInRole('admin') && ($voc->deleted == 'yes'))) {
+	setError('Wort nicht in der Datenbank vorhanden!');
 	header("location: {$SETTINGS['url']}/");
 	exit();
 }
