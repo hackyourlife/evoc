@@ -13,6 +13,19 @@ function getVoc($deleted = false) {
 	return $voc;
 }
 
+function getVocSynonyms($deleted = false) {
+	global $MYSQL;
+	$deleted = !$deleted ? "WHERE `deleted` = 'no'" : '';
+	$query = "SELECT `id`, `german`, GROUP_CONCAT(DISTINCT `english` ORDER BY `english` ASC SEPARATOR ', ') AS `synonyms` FROM `{$MYSQL['prefix']}voc` $deleted GROUP BY `german` HAVING COUNT(`english`) > 1 ORDER BY `time` DESC";
+	$result = mysql_query($query);
+	if(!$result)
+		return false;
+	$voc = array();
+	while($row = mysql_fetch_object($result))
+		$voc[] = $row;
+	return $voc;
+}
+
 function getVocByTimeCount($interval) {
 	global $MYSQL;
 	$interval = intVal($interval);

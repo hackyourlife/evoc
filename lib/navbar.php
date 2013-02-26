@@ -4,6 +4,7 @@ $elements = array();
 if(isLoggedIn()) {
 	$elements = array(
 		'Vokabelliste'	=> '/',
+		'Synonyme'	=> '/synonyms',
 		'Hinzufügen'	=> '/add',
 		'Trainer'	=> '/trainer',
 		'Statistik'	=> '/statistics',
