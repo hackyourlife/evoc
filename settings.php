@@ -14,7 +14,7 @@ if(!connect_mysql()) {
 include('lib/loginfilter.php');
 include('lib/navbar.php');
 
-$lastname = htmlentities($_SESSION['userinfo']->lastname, 0, 'UTF-8');
+$lastname = htmlspecialchars($_SESSION['userinfo']->lastname, 0, 'UTF-8');
 
 if(isset($_POST['lastname'])) {
 	$newlastname = trim($_POST['lastname']);

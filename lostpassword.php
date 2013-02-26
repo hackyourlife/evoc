@@ -7,7 +7,7 @@ require_once('lib/session.php');
 require_once('lib/login.php');
 require_once('lib/voc.php');
 
-$nav = array('Passwort vergessen' => $_SERVER['REQUEST_URI']);
+$nav = array('Passwort vergessen' => substr($_SERVER['REQUEST_URI'], strlen($SETTINGS['path'])));
 include('lib/navbar.php');
 
 $TITLE = 'Passwort vergessen';
@@ -15,7 +15,7 @@ $TITLE = 'Passwort vergessen';
 $CONTENT = <<< EOT
 <h2>Passwort vergessen</h2>
 
-<p>Du hast das Passwort deines Accounts vergessen und m&ouml;chtest es zur&uuml;cksetzen? Dann wende
+<p>Du hast das Passwort deines Accounts vergessen und möchtest es zurücksetzen? Dann wende
 dich bitte an einen Administrator.</p>
 EOT;
 

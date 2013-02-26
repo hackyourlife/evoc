@@ -22,9 +22,9 @@ else {
 	$top = '<tr><th>Englisch</th><th>Deutsch</th></tr>';
 	$rows = '';
 	foreach($voc as $v) {
-		$id = htmlentities($v->id);
-		$german = htmlentities($v->german, 0, 'UTF-8');
-		$english = htmlentities($v->english, 0, 'UTF-8');
+		$id = htmlspecialchars($v->id);
+		$german = htmlspecialchars($v->german, 0, 'UTF-8');
+		$english = htmlspecialchars($v->english, 0, 'UTF-8');
 		$rows .= "<tr><td>$english</td><td>$german</td></tr>\n";
 	}
 	$table = <<< EOT

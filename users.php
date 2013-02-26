@@ -73,8 +73,8 @@ if(isset($_GET['del']) && isset($_GET['code'])) {
 	$code = $_GET['code'];
 	if($code == $_SESSION['deletecode']) {
 		$userinfo = getUserInfo($userid);
-		$username = htmlentities($userinfo->username, 0, 'UTF-8');
-		$lastname = htmlentities($userinfo->lastname, 0, 'UTF-8');
+		$username = htmlspecialchars($userinfo->username, 0, 'UTF-8');
+		$lastname = htmlspecialchars($userinfo->lastname, 0, 'UTF-8');
 		$code = sha1(rand());
 		$_SESSION['deletecode'] = $code;
 		$TITLE = 'Sicherheitsbestätigung';
@@ -123,8 +123,8 @@ if(isset($_POST['group']) && isset($_POST['code'])) {
 $userinfo = getUserInfo($userid);
 $userstats = getUserStats($userid);
 
-$username = htmlentities($userinfo->username, 0, 'UTF-8');
-$lastname = htmlentities($userinfo->lastname, 0, 'UTF-8');
+$username = htmlspecialchars($userinfo->username, 0, 'UTF-8');
+$lastname = htmlspecialchars($userinfo->lastname, 0, 'UTF-8');
 $group = getRoleName($userinfo->group);
 $correct = $userinfo->correct;
 $wrong = $userinfo->wrong;

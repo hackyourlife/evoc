@@ -80,7 +80,7 @@ if(isset($_POST['voc']) && isset($_SESSION['voc'])) {
 		}
 	}
 
-	$sent = htmlentities(trim($_POST['voc']), 0, 'UTF-8');
+	$sent = htmlspecialchars(trim($_POST['voc']), 0, 'UTF-8');
 	if($correct)
 		$answertext = "<p class=\"correct\"><span>Richtig</span><br />$sent</p>";
 	else
@@ -100,8 +100,8 @@ if(isset($_POST['voc']) && isset($_SESSION['voc'])) {
 EOT;
 
 	foreach($_SESSION['vocs'] as $v) {
-		$english = htmlentities($v->english, 0, 'UTF-8');
-		$german = htmlentities($v->german, 0, 'UTF-8');
+		$english = htmlspecialchars($v->english, 0, 'UTF-8');
+		$german = htmlspecialchars($v->german, 0, 'UTF-8');
 		$id = $_SESSION['voc']->id;
 		$answertext .= <<< EOT
 		<tr>
@@ -157,8 +157,8 @@ if(!isset($_SESSION['voc']) || isset($_POST['voc']) || $_SESSION['intervalchange
 
 $table = '';
 if(isset($_SESSION['voc'])) {
-	$english = htmlentities($_SESSION['voc']->english, 0, 'UTF-8');
-	$german = htmlentities($_SESSION['voc']->german, 0, 'UTF-8');
+	$english = htmlspecialchars($_SESSION['voc']->english, 0, 'UTF-8');
+	$german = htmlspecialchars($_SESSION['voc']->german, 0, 'UTF-8');
 	$table = <<< EOT
 <form method="post" action="{$SETTINGS['path']}/trainer">
 	<table class="trainer">
@@ -186,7 +186,7 @@ if(isset($_SESSION['voc'])) {
 EOT;
 }
 
-$lastname = htmlentities($_SESSION['userinfo']->lastname, 0, 'UTF-8');
+$lastname = htmlspecialchars($_SESSION['userinfo']->lastname, 0, 'UTF-8');
 $total = $_SESSION['userinfo']->correct + $_SESSION['userinfo']->wrong;
 $percents = ($total != 0) ? ($_SESSION['userinfo']->correct / $total) * 100.0 : 0;
 

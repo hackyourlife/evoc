@@ -47,8 +47,8 @@ if($stats === false) {
 
 $tablebody = '';
 foreach($stats as $user) {
-	$username = htmlentities($user->username, 0, 'UTF-8');
-	$lastname = htmlentities($user->lastname, 0, 'UTF-8');
+	$username = htmlspecialchars($user->username, 0, 'UTF-8');
+	$lastname = htmlspecialchars($user->lastname, 0, 'UTF-8');
 	$group = getRoleName($user->group);
 	$userid = $user->id;
 	$ratio = intval($user->ratio);

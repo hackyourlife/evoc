@@ -22,7 +22,7 @@ if(!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-$nav = array('Synonyme Ändern' => $_SERVER['REQUEST_URI']);
+$nav = array('Synonyme ändern' => substr($_SERVER['REQUEST_URI'], strlen($SETTINGS['path'])));
 include('lib/navbar.php');
 
 $voc = getVocByID($id);
@@ -36,8 +36,8 @@ $vocs = getVocsByGerman($voc->german);
 
 $rows = '';
 foreach($vocs as $voc) {
-	$german = htmlentities($voc->german, 0, 'UTF-8');
-	$english = htmlentities($voc->english, 0, 'UTF-8');
+	$german = htmlspecialchars($voc->german, 0, 'UTF-8');
+	$english = htmlspecialchars($voc->english, 0, 'UTF-8');
 	$id = $voc->id;
 	$rows .= <<< EOT
 		<tr>

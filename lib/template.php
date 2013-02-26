@@ -24,7 +24,7 @@ if(isset($nav)) {
 				$active = ' class="active"';
 		} else {
 			$htmlurl = htmlentities($url);
-			if(($url == $uri) || ($url == $_SERVER['REQUEST_URI']))
+			if(($url == $uri) || ($SETTINGS['path'] . $url == $_SERVER['REQUEST_URI']))
 				$active = ' class="active"';
 		}
 		$navbar .= "<li$active><a href=\"{$SETTINGS['path']}$htmlurl\">$htmlname</a></li>\n";

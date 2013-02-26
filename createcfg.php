@@ -129,13 +129,13 @@ EOT
 	}
 }
 
-$hostname = isset($_POST['hostname']) ? htmlentities($_POST['hostname']) : '';
-$database = isset($_POST['database']) ? htmlentities($_POST['database']) : '';
-$username = isset($_POST['username']) ? htmlentities($_POST['username']) : '';
-$prefix = isset($_POST['prefix']) ? htmlentities($_POST['prefix']) : '';
+$hostname = isset($_POST['hostname']) ? htmlspecialchars($_POST['hostname']) : '';
+$database = isset($_POST['database']) ? htmlspecialchars($_POST['database']) : '';
+$username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '';
+$prefix = isset($_POST['prefix']) ? htmlspecialchars($_POST['prefix']) : '';
 
-$adminusername = isset($_POST['adminusername']) ? htmlentities($_POST['adminusername']) : '';
-$lastname = isset($_POST['lastname']) ? htmlentities($_POST['lastname']) : '';
+$adminusername = isset($_POST['adminusername']) ? htmlspecialchars($_POST['adminusername']) : '';
+$lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname']) : '';
 
 $TITLE = 'Erstkonfiguration';
 

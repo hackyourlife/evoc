@@ -28,9 +28,9 @@ else {
 	$top = '<tr><th>Deutsch</th><th>Englisch</th></tr>';
 	$rows = '';
 	foreach($voc as $v) {
-		$german = htmlentities($v->german, 0, 'UTF-8');
+		$german = htmlspecialchars($v->german, 0, 'UTF-8');
 		$id = urlencode($v->id);
-		$synonyms = htmlentities($v->synonyms, 0, 'UTF-8');
+		$synonyms = htmlspecialchars($v->synonyms, 0, 'UTF-8');
 		$rows .= "<tr><td><a href=\"{$SETTINGS['path']}/synonym/$id\">$german</a></td><td>$synonyms</td></tr>\n";
 	}
 	$table = <<< EOT

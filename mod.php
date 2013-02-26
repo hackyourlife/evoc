@@ -22,7 +22,7 @@ if(!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
-$nav = array('Ändern' => $_SERVER['REQUEST_URI']);
+$nav = array('Ändern' => substr($_SERVER['REQUEST_URI'], strlen($SETTINGS['path'])));
 include('lib/navbar.php');
 
 if(isset($_POST['mod']) && isset($_POST['german']) && isset($_POST['english'])) {
@@ -50,8 +50,8 @@ if(($voc === false) || (!isUserInRole('admin') && ($voc->deleted == 'yes'))) {
 	exit();
 }
 
-$german = htmlentities($voc->german, 0, 'UTF-8');
-$english = htmlentities($voc->english, 0, 'UTF-8');
+$german = htmlspecialchars($voc->german, 0, 'UTF-8');
+$english = htmlspecialchars($voc->english, 0, 'UTF-8');
 
 $TITLE = 'Vokabel modifizieren';
 $CONTENT = <<< EOT
