@@ -5,7 +5,7 @@ RewriteEngine on
 #RewriteCond %{REQUEST_FILENAME} -f
 #RewriteRule ^(.*)$ %{REQUEST_FILENAME} [L]
 
-RewriteRule ^mod\/([0-9]+)$ mod.php?id=$1 [L]
+RewriteRule ^(mod|synonym)\/([0-9]+)$ $1.php?id=$2 [L]
 
 RewriteRule ^statistics\/(.*)$ statistics.php?o=$1 [L]
 

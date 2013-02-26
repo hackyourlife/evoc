@@ -63,7 +63,7 @@ function getVocByTime($interval) {
 function getVocsByGerman($german) {
 	global $MYSQL;
 	$german = mysql_real_escape_string($german);
-	$query = "SELECT `id`, `time`, `english`, `german` FROM `{$MYSQL['prefix']}voc` WHERE `german` = '$german' AND `deleted` = 'no'";
+	$query = "SELECT `id`, `time`, `english`, `german` FROM `{$MYSQL['prefix']}voc` WHERE `german` = '$german' AND `deleted` = 'no' ORDER BY `english` ASC";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;
