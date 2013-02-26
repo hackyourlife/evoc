@@ -3,7 +3,7 @@
 function getVoc($deleted = false) {
 	global $MYSQL;
 	$deleted = !$deleted ? "WHERE `deleted` = 'no'" : '';
-	$query = "SELECT `id`, `time`, `english`, `german`, `deleted`, `creator`, `lastmodified`, `deletedby` FROM `{$MYSQL['prefix']}voc` $deleted ORDER BY `time` DESC";
+	$query = "SELECT `id`, DATE_FORMAT(`time`, '%d.%m.%Y') AS `date`, `english`, `german`, `deleted`, `creator`, `lastmodified`, `deletedby` FROM `{$MYSQL['prefix']}voc` $deleted ORDER BY `time` DESC";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;

@@ -26,14 +26,15 @@ else if(count($voc) == 0)
 	setError('Keine Vokabeln vorhanden');
 else {
 	$xhdr = $isAdmin ? '<th>Ersteller</th>' : '';
-	$xhdr = $isUser ? "<th></th>$xhdr" : '';
+	$xhdr = $isUser ? "<th></th>$xhdr<th class=\"time\">Datum</th>" : '';
 	$top = "<tr><th>Englisch</th><th>Deutsch</th>$xhdr</tr>";
 	$rows = '';
 	foreach($voc as $v) {
-		$id = htmlentities($v->id);
-		$german = htmlentities($v->german, 0, 'UTF-8');
-		$english = htmlentities($v->english, 0, 'UTF-8');
-		$user = htmlentities(getUsername($v->creator));
+		$id = htmlspecialchars($v->id);
+		$german = htmlspecialchars($v->german, 0, 'UTF-8');
+		$english = htmlspecialchars($v->english, 0, 'UTF-8');
+		$date = htmlspecialchars($v->date, 0, 'UTF-8');
+		$user = htmlspecialchars(getUsername($v->creator));
 		$creator = $v->creator == 0 ? 'unbekannt' : "<a href=\"{$SETTINGS['path']}/user/{$v->creator}\">$user</a>";
 		$actions = '';
 		// restore deleted voc
@@ -42,6 +43,7 @@ else {
 		$actions .= "<a href=\"{$SETTINGS['path']}/del/$id\"><img src=\"{$SETTINGS['path']}/images/icons/cross.png\" onclick=\"return confirm('Wirklich löschen?');\" alt=\"L&ouml;schen\" title=\"L&ouml;schen\" /></a>";
 		$extra = $isUser ? "<td class=\"actions\">$actions</td>" : '';
 		$extra .= $isAdmin ? "<td>$creator</td>" : '';
+		$extra .= $isUser ? "<td class=\"time\">$date</td>" : '';
 		$links = $isUser ? "<td><a href=\"{$SETTINGS['path']}/mod/$id\">$english</a></td><td><a href=\"{$SETTINGS['path']}/mod/$id\">$german</a></td>" : "<td>$english</td><td>$german</td>";
 		$class = ($isAdmin && $v->deleted == 'yes') ? ' class="deleted"' : '';
 		$rows .= "<tr$class>$links$extra</tr>\n";
