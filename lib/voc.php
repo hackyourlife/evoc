@@ -1,9 +1,19 @@
 <?php
 
-function getVoc($deleted = false) {
+function getVoc($deleted = false, $interval = 0, $synonyms = false) {
 	global $MYSQL;
-	$deleted = !$deleted ? "WHERE `deleted` = 'no'" : '';
-	$query = "SELECT `id`, DATE_FORMAT(`time`, '%d.%m.%Y') AS `date`, `english`, `german`, `deleted`, `creator`, `lastmodified`, `deletedby` FROM `{$MYSQL['prefix']}voc` $deleted ORDER BY `time` DESC";
+	$interval = intVal($interval);
+	$has_where = !$deleted || $interval;
+	$where = $has_where ? 'WHERE ' : '';
+	if(!$deleted)
+		$where .= '`deleted` = \'no\'';
+	if($interval > 0)
+		$where .= (!$deleted ? ' AND ' : '') . "`time` >= SUBDATE(NOW(), INTERVAL $interval DAY)";
+	$limit = $interval < 0 ? 'LIMIT ' . -$interval : '';
+	if(!$synonyms)
+		$query = "SELECT `id`, DATE_FORMAT(`time`, '%d.%m.%Y') AS `date`, `english`, `german`, `deleted`, `creator`, `lastmodified`, `deletedby` FROM `{$MYSQL['prefix']}voc` $where ORDER BY `time` DESC $limit";
+	else
+		$query = "SELECT `id`, DATE_FORMAT(`time`, '%d.%m.%Y') AS `date`, GROUP_CONCAT(DISTINCT `english` ORDER BY `english` ASC SEPARATOR ', ') AS `english`, `german` FROM `{$MYSQL['prefix']}voc` $where GROUP BY `german` ORDER BY `time` DESC $limit";
 	$result = mysql_query($query);
 	if(!$result)
 		return false;

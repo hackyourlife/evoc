@@ -58,7 +58,9 @@ EOT;
 
 $CONTENT = <<< EOT
 <h2>Vokabelliste</h2>
-<p><a href="{$SETTINGS['path']}/print">zur Druckansicht</a></p>
+<p><a href="{$SETTINGS['path']}/print">zur Druckansicht</a>
+	(<a href="{$SETTINGS['path']}/print/7/days">1</a>, <a href="{$SETTINGS['path']}/print/14/days">2</a>, <a href="{$SETTINGS['path']}/print/28/days">4</a> Wochen /
+	<a href="{$SETTINGS['path']}/print/25/words">25</a>, <a href="{$SETTINGS['path']}/print/50/words">50</a>, <a href="{$SETTINGS['path']}/print/100/words">100</a> Wörter)</p>
 $table
 EOT;
 

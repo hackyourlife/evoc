@@ -11,7 +11,9 @@ if(!connect_mysql()) {
 	exit();
 }
 
-$voc = getVoc();
+$time = isset($_GET['t']) ? intVal($_GET['t']) : 0;
+
+$voc = getVoc(false, $time, true);
 
 $table = '';
 if($voc === false)
