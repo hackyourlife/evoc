@@ -102,7 +102,7 @@ EOT;
 	foreach($_SESSION['vocs'] as $v) {
 		$english = htmlspecialchars($v->english, 0, 'UTF-8');
 		$german = htmlspecialchars($v->german, 0, 'UTF-8');
-		$id = $_SESSION['voc']->id;
+		$id = $v->id;
 		$answertext .= <<< EOT
 		<tr>
 			<td><a href="{$SETTINGS['path']}/mod/$id">$german</a></td>
