@@ -28,7 +28,7 @@ include('lib/navbar.php');
 if(isset($_POST['mod']) && isset($_POST['german']) && isset($_POST['english'])) {
 	$german = trim($_POST['german']);
 	$english = trim($_POST['english']);
-	if((strlen($german) == 0) || (strlen($english) == 0))
+	if((strlen($german) == 0) && (strlen($english) == 0))
 		setError('Du musst das Formular schon ausfüllen!');
 	else {
 		if(!modVoc($id, $german, $english, $_SESSION['userid']))
