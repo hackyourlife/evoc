@@ -13,11 +13,17 @@ RewriteRule ^user\/([0-9]+)$ users.php?id=$1 [L]
 RewriteRule ^user\/([0-9]+)\/([0-9a-z]+)$ users.php?id=$1&code=$2&del=true [L]
 RewriteRule ^print\/([0-9]+)\/days$ print.php?t=$1 [L]
 RewriteRule ^print\/([0-9]+)\/words$ print.php?t=-$1 [L]
+RewriteRule ^print\/since/([0-9]+)\/([0-9]+)\/([0-9]+)$ print.php?d=$1&m=$2&y=$3 [L]
+RewriteRule ^print\/since$ print-since.php [L]
+
+RewriteRule ^export\/([0-9]+)\/days$ export.php?t=$1 [L]
+RewriteRule ^export\/([0-9]+)\/words$ export.php?t=-$1 [L]
+RewriteRule ^export\/since/([0-9]+)\/([0-9]+)\/([0-9]+)$ export.php?d=$1&m=$2&y=$3 [L]
 
 # delete / restore
 RewriteRule ^(del|restore)\/([0-9]+)$ $1.php?id=$2 [L]
 
-RewriteRule ^(add|createcfg|logout|mod|print|register|settings|statistics|trainer|lostpassword|synonyms)$ $1.php [QSA,L]
+RewriteRule ^(add|createcfg|logout|mod|print|export|register|settings|statistics|trainer|lostpassword|synonyms)$ $1.php [QSA,L]
 
 #RewriteCond %{REQUEST_FILENAME}.php -f
 #RewriteRule ^(.*)$ %{REQUEST_FILENAME}.php [QSA,L]

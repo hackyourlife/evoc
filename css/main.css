@@ -1,14 +1,9 @@
 body {
-	/*font: 75%/ 1.5em Helvetica, Arial, sans-serif;*/
 	font: 14px/ 1.5em Helvetica, Arial, sans-serif;
 }
 
 img {
 	margin-bottom: -4px;
-}
-
-hr {
-	display: none;
 }
 
 p.info, p.warning, p.error {

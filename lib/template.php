@@ -15,7 +15,7 @@ $navbar = '';
 if(isset($nav)) {
 	$navbar = '<ul id="nav">';
 	foreach($nav as $name => $url) {
-		$htmlname = htmlentities($name, 0, 'UTF-8');
+		$htmlname = htmlspecialchars($name, 0, 'UTF-8');
 		$htmlurl = '';
 		$active = '';
 		if(is_array($url)) {
@@ -23,7 +23,7 @@ if(isset($nav)) {
 			if((array_search($uri, $url) !== false) || (array_search($_SERVER['REQUEST_URI'], $url) !== false))
 				$active = ' class="active"';
 		} else {
-			$htmlurl = htmlentities($url);
+			$htmlurl = htmlspecialchars($url);
 			if(($url == $uri) || ($SETTINGS['path'] . $url == $_SERVER['REQUEST_URI']))
 				$active = ' class="active"';
 		}
@@ -38,22 +38,22 @@ $info = getInfo();
 
 $boxes = '';
 if($error !== false) {
-	$error_html = htmlentities($error, 0, 'UTF-8');
+	$error_html = htmlspecialchars($error, 0, 'UTF-8');
 	$boxes .= "<p class=\"error\"><img src=\"{$SETTINGS['path']}/images/icons/error.png\" alt=\"Fehler:\" /> $error_html</p>\n";
 }
 
 if($warning !== false) {
-	$warning_html = htmlentities($warning, 0, 'UTF-8');
+	$warning_html = htmlspecialchars($warning, 0, 'UTF-8');
 	$boxes .= "<p class=\"warning\"><img src=\"{$SETTINGS['path']}/images/icons/error.png\" alt=\"Warnung:\" /> $warning_html</p>\n";
 }
 
 if($info !== false) {
-	$info_html = htmlentities($info, 0, 'UTF-8');
+	$info_html = htmlspecialchars($info, 0, 'UTF-8');
 	$boxes .= "<p class=\"info\"><img src=\"{$SETTINGS['path']}/images/icons/information.png\" alt=\"Information:\" /> $info_html</p>\n";
 }
 
 if(!isset($TITLEHTML))
-	$TITLEHTML = htmlentities(isset($TITLE) ? "$TITLE | eVOC - Englisch Vokabeltrainer" : "eVOC | Englisch Vokabeltrainer", 0, 'UTF-8');
+	$TITLEHTML = htmlspecialchars(isset($TITLE) ? "$TITLE | eVOC - Englisch Vokabeltrainer" : "eVOC | Englisch Vokabeltrainer", 0, 'UTF-8');
 
 echo(<<< EOT
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -71,15 +71,11 @@ $navbar
 			</div>
 		</div>
 
-		<hr />
-
 		<div id="content">
 			<div class="wrapper">
 				{$boxes}{$CONTENT}
 			</div>
 		</div>
-
-		<hr />
 
 		<div id="footer">
 			<div class="copy">&copy; <a href="http://hackyourlife.tk">hackyourlife</a></div>

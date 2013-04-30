@@ -2,14 +2,17 @@
 
 function getVoc($deleted = false, $interval = 0, $synonyms = false) {
 	global $MYSQL;
-	$interval = intVal($interval);
 	$has_where = !$deleted || $interval;
 	$where = $has_where ? 'WHERE ' : '';
 	if(!$deleted)
 		$where .= '`deleted` = \'no\'';
-	if($interval > 0)
-		$where .= (!$deleted ? ' AND ' : '') . "`time` >= SUBDATE(NOW(), INTERVAL $interval DAY)";
-	$limit = $interval < 0 ? 'LIMIT ' . -$interval : '';
+	$limit = '';
+	if(is_int($interval)) {
+		if($interval > 0)
+			$where .= (!$deleted ? ' AND ' : '') . "`time` >= SUBDATE(NOW(), INTERVAL $interval DAY)";
+		$limit = $interval < 0 ? 'LIMIT ' . -$interval : '';
+	} else
+		$where .= (!$deleted ? ' AND ' : '') . "DATE(`time`) >= '$interval'";
 	if(!$synonyms)
 		$query = "SELECT `id`, DATE_FORMAT(`time`, '%d.%m.%Y') AS `date`, `english`, `german`, `deleted`, `creator`, `lastmodified`, `deletedby` FROM `{$MYSQL['prefix']}voc` $where ORDER BY `time` DESC $limit";
 	else

@@ -12,6 +12,12 @@ if(!connect_mysql()) {
 }
 
 $time = isset($_GET['t']) ? intVal($_GET['t']) : 0;
+if(isset($_GET['d']) && isset($_GET['m']) && isset($_GET['y'])) {
+	$d = intVal($_GET['d']);
+	$m = intVal($_GET['m']);
+	$y = intVal($_GET['y']);
+	$time = "$y-$m-$d";
+}
 
 $voc = getVoc(false, $time, true);
 
