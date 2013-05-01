@@ -16,7 +16,12 @@ if(isset($_GET['d']) && isset($_GET['m']) && isset($_GET['y'])) {
 	$d = intVal($_GET['d']);
 	$m = intVal($_GET['m']);
 	$y = intVal($_GET['y']);
-	$time = "$y-$m-$d";
+	if($d < 1) $d = 1;
+	if($m < 1) $m = 1;
+	if($y < 0) $y = 0;
+	if($d > 31) $d = 31;
+	if($m > 12) $m = 12;
+	$time = sprintf('%04d-%02d-%02d', $y, $m, $d);
 }
 
 $voc = getVoc(false, $time, true);
