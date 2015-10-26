@@ -53,7 +53,7 @@ Als ungesalzenes SHA-1
 ### Kann ein User Vokabeln löschen?
 Nur bedingt. Wenn er ein Vokabel gelöscht hat, so ist es zwar für andere User
 unsichtbar, aber ein Administrator kann es noch sehen und auch bei Bedarf
-wiederherstellen.
+wiederherstellen (oder endgültig löschen).
 
 ### Gibt es eine Mobile-Version (also für Telefone o.ä.)?
 Nein.
@@ -76,5 +76,5 @@ Ja, via ```settings.cfg```.
 Nein, das ist dann nur via Datenbank-Eingriff möglich.
 
 ### Wozu muss man den Nachnamen angeben?
-Damit in der Statistikseite ein Name steht, mit dem man auch etwas anfangen
+Damit auf der Statistikseite ein Name steht, mit dem man auch etwas anfangen
 kann, und damit dich der Trainer ganz persönlich fragen kann.
