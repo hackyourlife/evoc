@@ -59,8 +59,8 @@ wiederherstellen (oder endgültig löschen).
 Nein.
 
 ### Kann der Administrator seinen eigenen Account löschen?
-Ja. Wenn man das tut muss man ihn per direktem Eingriff in die Datenbank wieder
-anlegen!
+Nein. Er kann auch die Gruppenzugehörigkeit seines eigenen Accounts nicht
+ändern, da er sich sonst dadurch seine Admin-Rechte entziehen könnte.
 
 ### Was hat es mit den Gruppen auf sich?
 * Gast: kann nur lesend auf die Vokabelliste zugreifen
