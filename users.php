@@ -98,7 +98,9 @@ if(isset($_POST['deleteconfirmed']) && isset($_POST['type'])) {
 	$code = $_POST['deleteconfirmed'];
 	$type = $_POST['type'];
 	if(($code == $_SESSION['deletecode']) && ($type == '1')) {
-		if(deleteUser($userid))
+		if($userid == $_SESSION['userid'])
+			setError('Eigener Benutzer kann nicht gelöscht werden!');
+		else if(deleteUser($userid))
 			setInfo('Benutzer erfolgreich gelöscht!');
 		else
 			setError('Benutzer nicht gelöscht!');
@@ -111,7 +113,9 @@ if(isset($_POST['group']) && isset($_POST['code'])) {
 	$group = $_POST['group'];
 	$code = $_POST['code'];
 	if($code == $_SESSION['groupcode']) {
-		if(setUserGroup($userid, $group))
+		if($userid == $_SESSION['userid'])
+			setError('Gruppe des eigenen Benutzers kann nicht geändert werden!');
+		else if(setUserGroup($userid, $group))
 			setInfo("Gruppe erfolgreich zugewiesen!");
 		else
 			setError("Die Gruppe konnte nicht zugewiesen werden!");
@@ -143,6 +147,8 @@ $_SESSION['deletecode'] = $deletecode;
 
 $groupcode = sha1(rand());
 $_SESSION['groupcode'] = $groupcode;
+
+$deleteenabled = $userid != $_SESSION['userid'] ? '' : ' disabled="disabled"';
 
 $TITLE = 'Benutzer';
 
@@ -212,14 +218,14 @@ $CONTENT = <<< EOT
 			<option value="user"$selecteduser>Benutzer</option>
 			<option value="admin"$selectedadmin>Administrator</option>
 		</select>
-		<input type="submit" name="save" value="Speichern" />
+		<input type="submit" name="save" value="Speichern"$deleteenabled />
 	</p>
 </form>
 
 <h3>L&ouml;schen</h3>
 <form method="post" action="{$SETTINGS['path']}/user/$userid">
 	<input type="hidden" name="code" value="$deletecode" />
-	<p>Account <input type="submit" name="delete" value="l&ouml;schen" /></p>
+	<p>Account <input type="submit" name="delete" value="l&ouml;schen"$deleteenabled /></p>
 </form>
 EOT;
 
